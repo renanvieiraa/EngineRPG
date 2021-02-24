@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Graphics/Battlebacks/045-Cave03.jpg" type="Texture" id=1]
+[ext_resource path="res://scenes/interface/Inicial.gd" type="Script" id=2]
+
+[node name="MenuStart" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inicial" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inicial"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = 384.0
+margin_right = 32.0
+margin_bottom = -128.0
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="iniciar" type="Button" parent="Inicial/VBoxContainer"]
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 24.0
+text = "Iniciar"
+
+[node name="carregar" type="Button" parent="Inicial/VBoxContainer"]
+margin_top = 34.0
+margin_right = 64.0
+margin_bottom = 54.0
+text = "Carregar"
+
+[node name="sair" type="Button" parent="Inicial/VBoxContainer"]
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 84.0
+text = "Sair"
+
+[node name="Label" type="Label" parent="Inicial"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_top = 160.0
+margin_right = -65.0
+margin_bottom = -408.0
+rect_scale = Vector2( 3, 3 )
+text = "RPG MAKER ENGINE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Inicial/VBoxContainer/iniciar" to="Inicial" method="_on_iniciar_pressed"]
+[connection signal="pressed" from="Inicial/VBoxContainer/sair" to="Inicial" method="_on_sair_pressed"]

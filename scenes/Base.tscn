@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/map/Mapas/Mapa1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Graphics/Tilesets/004-Mountain01.png" type="Texture" id=3]
+[ext_resource path="res://scenes/interface/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/actors/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Mapa.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 19.7693
+height = 13.7959
+
+[node name="Base" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 71.2719
+margin_top = 60.5811
+margin_right = 71.2719
+margin_bottom = 60.5811
+
+[node name="YSort" type="YSort" parent="."]
+script = ExtResource( 6 )
+
+[node name="Mapa1" parent="YSort" instance=ExtResource( 2 )]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 415.288, 411.329 )
+z_as_relative = false
+collision_layer = 2147483649
+collision_mask = 2147483648
+
+[node name="arvore" type="StaticBody2D" parent="YSort"]
+position = Vector2( 587.336, 299.925 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="004-Mountain01" type="Sprite" parent="YSort/arvore"]
+position = Vector2( 0, -26.1324 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 512, 128, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/arvore"]
+position = Vector2( 0, 27.6501 )
+shape = SubResource( 1 )
+
+[node name="Enemy" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 149.907, 435.817 )
+speed = 50

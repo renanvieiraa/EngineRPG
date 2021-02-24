@@ -1,0 +1,188 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://assets/Graphics/Characters/052-Undead02.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://assets/Graphics/HUD/base.svg" type="Texture" id=3]
+[ext_resource path="res://assets/Graphics/HUD/full.svg" type="Texture" id=4]
+[ext_resource path="res://assets/Graphics/Animations/001-Action01.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 112, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 112, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 112, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 120, 112, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 56, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 56, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 56, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 120, 56, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 168, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 168, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 168, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 120, 168, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 0, 40, 56 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 120, 0, 40, 56 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "runRight",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "runLeft",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "runUp",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "runDown",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=18]
+height = 4.78548
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 192.605
+
+[sub_resource type="CircleShape2D" id=20]
+radius = 5.1788
+
+[sub_resource type="Animation" id=21]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4 ]
+}
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 2147483653
+collision_mask = 4
+script = ExtResource( 2 )
+speed = 15
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4.76837e-07, -10.9135 )
+scale = Vector2( 0.631112, 0.631112 )
+texture = ExtResource( 5 )
+vframes = 2
+hframes = 5
+frame = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 17 )
+animation = "runDown"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 14.9831 )
+shape = SubResource( 18 )
+
+[node name="detect" type="Area2D" parent="."]
+collision_layer = 2147483652
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect"]
+shape = SubResource( 19 )
+
+[node name="atkrange" type="Area2D" parent="detect"]
+collision_layer = 2147483652
+collision_mask = 2147483649
+
+[node name="atkrangecollision" type="CollisionShape2D" parent="detect/atkrange"]
+position = Vector2( 0, 14.9831 )
+scale = Vector2( 3.52, 3.52 )
+shape = SubResource( 20 )
+
+[node name="enemyHP" type="TextureProgress" parent="."]
+margin_left = -24.9
+margin_top = -34.2363
+margin_right = 188.1
+margin_bottom = 5.76371
+rect_scale = Vector2( 0.243713, 0.243713 )
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 21 )
+[connection signal="body_entered" from="detect" to="." method="_on_detect_body_entered"]
+[connection signal="body_exited" from="detect" to="." method="_on_detect_body_exited"]
+[connection signal="body_entered" from="detect/atkrange" to="." method="_on_atkrange_body_entered"]
+[connection signal="body_exited" from="detect/atkrange" to="." method="_on_atkrange_body_exited"]
